@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mapper-cpu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mapper-cpu
+  template:
+    metadata:
+      labels:
+        app: mapper-cpu
+    spec:
+      hostNetwork: true
+      containers:
+        - name: mapper-cpu
+          image: jackxu/mapper-cpu:v1.0.0
+          command: ["/mapper-cpu/mapper-cpu"]
+          args: ["--token=TOKEN"]
+          imagePullPolicy: Always
+      restartPolicy: Always
